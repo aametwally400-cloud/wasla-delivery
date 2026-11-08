@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Wasla · وصلة — Food delivery & ops dashboard</title>
+  <meta name="description" content="Wasla is a bilingual (Arabic/English) food-delivery web app with live order tracking and an operations dashboard. Built with vanilla JavaScript, no framework, no build step." />
+  <meta name="theme-color" content="#FF5B2E" />
+  <meta property="og:title" content="Wasla · وصلة — Food delivery & ops dashboard" />
+  <meta property="og:description" content="Order food, track your rider live, and run the whole operation from a real-time dashboard." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/store.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <script>
+    // Apply saved language + theme before first paint (no flash).
+    // ?lang=en|ar and ?theme=dark|light in the URL override (handy for sharing a link).
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem('wasla:prefs') || '{}');
+        var q = new URLSearchParams(location.search);
+        if (/^(ar|en)$/.test(q.get('lang') || '')) s.lang = q.get('lang');
+        if (/^(dark|light|system)$/.test(q.get('theme') || '')) s.theme = q.get('theme');
+        if (q.has('lang') || q.has('theme')) localStorage.setItem('wasla:prefs', JSON.stringify(s));
+        var lang = s.lang || 'ar';
+        var theme = s.theme || 'system';
+        if (theme === 'system') theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="app" aria-live="polite"></div>
+  <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+  <div id="overlay-root"></div>
+  <noscript><p style="padding:24px">Wasla needs JavaScript to run.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
