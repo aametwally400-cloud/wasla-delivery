@@ -46,7 +46,7 @@ export function openItemModal(itemId) {
       panel.innerHTML = `
         <button class="icon-btn modal-close" type="button" aria-label="${t('close')}">${icon('x', 20)}</button>
         <div class="modal-body">
-          ${media(item.img, { cls: 'item-modal-media', w: 1000, label: L(item.name) })}
+          ${media(item.img, { cls: 'item-modal-media', w: 800, label: L(item.name) })}
           <div class="item-modal-head">
             <h2>${esc(L(item.name))}</h2>
             ${item.desc ? `<p>${esc(L(item.desc))}</p>` : ''}
@@ -151,7 +151,7 @@ export default function restaurant(main, { params: [id], query }) {
 
   main.innerHTML = `
     <div class="rest-hero">
-      ${media(r.cover, { cls: 'rest-cover', w: 1800, label: L(r.name) })}
+      ${media(r.cover, { cls: 'rest-cover', w: 1400, label: L(r.name) })}
       <div class="container">
         <div class="rest-head card">
           ${restLogo(r)}
